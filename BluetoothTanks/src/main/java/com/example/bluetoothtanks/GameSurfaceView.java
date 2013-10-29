@@ -29,7 +29,7 @@ import javax.microedition.khronos.opengles.GL10;
  * Created by Sasha on 9/15/13.
  */
 public class GameSurfaceView extends GLSurfaceView {
-
+//hello
     float FRUSTUM_WIDTH = 12.8f;
     float FRUSTUM_HEIGHT = 7.2f;
     int ASTEROIDS_NUMBER=10;
