@@ -164,7 +164,7 @@ public class BluetoothConnect {
 //        bundle.putString(MainActivity.DEVICE_NAME, device.getName());
 //        msg.setData(bundle);
 //        mHandler.sendMessage(msg);
-        SERVER=false;
+      //  SERVER=false;
         setState(STATE_CONNECTED);
 
     }
@@ -461,7 +461,7 @@ public class BluetoothConnect {
 //                    for(float i:array){
 //                        sb.append(i);
 //                    }
-                    Log.d("READ_ARREY", "" + (System.currentTimeMillis() - timeStart1));
+                   // Log.d("READ_ARREY", "" + (System.currentTimeMillis() - timeStart1));
                     timeStart1=0;
 
                 } catch (IOException e) {

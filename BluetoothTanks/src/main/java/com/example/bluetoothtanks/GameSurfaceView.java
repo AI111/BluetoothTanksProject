@@ -201,7 +201,7 @@ public class GameSurfaceView extends GLSurfaceView {
                 startTime= System.currentTimeMillis();
                 fps++;
                 if(System.currentTimeMillis()-dt>=1000){
-                   //Log.d("FPS ",BluetoothConnect.SERVER+" "+fps+" "+serverTank.position.x+" "+serverTank.position.y+" "+tankBullet.position.x+" "+tankBullet.position.y);
+                   Log.d("FPS ",BluetoothConnect.SERVER+" "+fps);
                     fps=0;
                     dt= System.currentTimeMillis();
                 }
@@ -221,12 +221,12 @@ public class GameSurfaceView extends GLSurfaceView {
                 int i =6;
                 for(Asteroid asteroid1 : asteroids){
                    BluetoothConnect.WRITE_ARREY[i]=asteroid1.position.x;
-                   // Log.d("ASTEROID_1",i+" "+asteroid1.position.x);
+                    Log.d("ASTEROID_1",i+" "+asteroid1.position.x);
                    BluetoothConnect.WRITE_ARREY[++i]=asteroid1.position.y;
-                   // Log.d("ASTEROID_2",i+" "+asteroid1.position.y);
+                    Log.d("ASTEROID_2",i+" "+asteroid1.position.y);
                    BluetoothConnect.WRITE_ARREY[++i]=asteroid1.angle;
-                   // Log.d("ASTEROID_3",i+" "+asteroid1.angle);
-
+                    Log.d("ASTEROID_3",i+" "+asteroid1.angle);
+                        i++;
                 }
                 activity.myBluetoothConnect.write();
                 BluetoothConnect.WRITE_ARREY[3]=-100;
@@ -248,13 +248,12 @@ public class GameSurfaceView extends GLSurfaceView {
                     //BluetoothConnect.READ_ARREY[4]=-100;
 
                    }
-                Log.v("ARRAY LENGHT", "" + bullets.size() + " " + BluetoothConnect.READ_ARREY[3]);
+           //     Log.v("ARRAY LENGHT", "" + bullets.size() + " " + BluetoothConnect.READ_ARREY[3]);
                // clientTankBullet.position.x=BluetoothConnect.READ_ARREY[3];
                // clientTankBullet.position.y=BluetoothConnect.READ_ARREY[4];
                 //clientTankBullet.angle=BluetoothConnect.READ_ARREY[5];
 
-                Log.d("WRITE_ARRAY", "" + Arrays.toString(BluetoothConnect.WRITE_ARREY));
-                Log.d("READ_ARREY", "" + Arrays.toString(BluetoothConnect.READ_ARREY));
+
 
 
                 gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
@@ -290,17 +289,23 @@ public class GameSurfaceView extends GLSurfaceView {
                     for(Asteroid asteroid1:asteroids){
                         spriteBatcher.drawSprite(asteroid1.position.x,asteroid1.position.y,1,1
                                 ,asteroid1.angle,asteroidRegion);
+
                     }
-                }else{
+                    Log.d("WRITE_ARRAY", "" + Arrays.toString(BluetoothConnect.WRITE_ARREY));
+                    Log.d("READ_ARREY", "" + Arrays.toString(BluetoothConnect.READ_ARREY));
+                }else {
+                    Log.d("WRITE_ARRAY", "" + Arrays.toString(BluetoothConnect.WRITE_ARREY));
+                    Log.d("READ_ARREY", "" + Arrays.toString(BluetoothConnect.READ_ARREY));
                     if(BluetoothConnect.READ_ARREY[6]!=-100){
                         spriteBatcher.drawSprite(BluetoothConnect.READ_ARREY[6],BluetoothConnect.READ_ARREY[7],1,1
                                 ,BluetoothConnect.READ_ARREY[8],asteroidRegion);
                         int j=9;
 
                         while(BluetoothConnect.READ_ARREY[j]!=-100){
-                            spriteBatcher.drawSprite(BluetoothConnect.READ_ARREY[i],BluetoothConnect.READ_ARREY[++j],1,1
+                            spriteBatcher.drawSprite(BluetoothConnect.READ_ARREY[j],BluetoothConnect.READ_ARREY[++j],1,1
                                     ,BluetoothConnect.READ_ARREY[++j],asteroidRegion);
-                            Log.d("DRAW ASTEROID", i + "");
+                            j++;
+                            Log.d("DRAW ASTEROID", j+ "");
                         }
                     }
                 }
