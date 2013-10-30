@@ -11,6 +11,8 @@ import android.util.Log;
 
 import com.example.bluetoothtanks.framework.Positions;
 
+import junit.framework.Test;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -406,6 +408,7 @@ public class BluetoothConnect {
      * It handles all incoming and outgoing transmissions.
      */
     private class ConnectedThread extends Thread {
+
         private final BluetoothSocket mmSocket;
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;
@@ -434,7 +437,7 @@ public class BluetoothConnect {
             mmInStream = tmpIn;
             mmOutStream = tmpOut;
              byteOutBuffer = ByteBuffer.allocate(WRITE_ARREY.length * 4);
-             floatOutBuffer = byteOutBuffer.asFloatBuffer();
+             floatOutBuffer = byteOutBuffer.order(ByteOrder.BIG_ENDIAN).asFloatBuffer();
 
 
 
@@ -454,14 +457,19 @@ public class BluetoothConnect {
                     // Read from the InputStream
 
                     bytes = mmInStream.read(buffer);
-                    floatInBufferf = ByteBuffer.wrap(buffer).order(ByteOrder.BIG_ENDIAN).asFloatBuffer();
-                    floatInBufferf.get(READ_ARREY);
+
+
+                        floatInBufferf = ByteBuffer.wrap(buffer).asFloatBuffer();
+                        floatInBufferf.get(READ_ARREY);
+
+
 
                    // StringBuffer sb=new StringBuffer();
 //                    for(float i:array){
 //                        sb.append(i);
 //                    }
-                   // Log.d("READ_ARREY", "" + (System.currentTimeMillis() - timeStart1));
+                    floatInBufferf.flip();
+                    Log.d("READ_ARREY", "" + (System.currentTimeMillis() - timeStart1));
                     timeStart1=0;
 
                 } catch (IOException e) {
@@ -493,33 +501,33 @@ public class BluetoothConnect {
                 // Share the sent message back to the UI Activity
              //   mHandler.obtainMessage(MainActivity.MESSAGE_WRITE, -1, -1, buffer).sendToTarget();
 
-        //       Log.v("WRITE_ARREY",""+ (System.currentTimeMillis()-timeStart2));
+               Log.v("WRITE_ARREY",""+ (System.currentTimeMillis()-timeStart2));
                 timeStart2=0;
             } catch (IOException e) {
                 Log.e(TAG, "Exception during write", e);
             }
         }
-        public void read() {
-
-            try {
-                timeStart2= System.currentTimeMillis();
-
-
-                floatOutBuffer.put(WRITE_ARREY);
-
-                mmOutStream.write(byteOutBuffer.array());
-
-                byteOutBuffer.clear();
-                floatOutBuffer.clear();
-                // Share the sent message back to the UI Activity
-                //   mHandler.obtainMessage(MainActivity.MESSAGE_WRITE, -1, -1, buffer).sendToTarget();
-
-             //   Log.v("WRITE_ARREY",""+ (System.currentTimeMillis()-timeStart2));
-                timeStart2=0;
-            } catch (IOException e) {
-                Log.e(TAG, "Exception during write", e);
-            }
-        }
+//        public void read() {
+//
+//            try {
+//                timeStart2= System.currentTimeMillis();
+//
+//
+//                floatOutBuffer.put(WRITE_ARREY);
+//
+//                mmOutStream.write(byteOutBuffer.array());
+//
+//                byteOutBuffer.clear();
+//                floatOutBuffer.clear();
+//                // Share the sent message back to the UI Activity
+//                //   mHandler.obtainMessage(MainActivity.MESSAGE_WRITE, -1, -1, buffer).sendToTarget();
+//
+//             //   Log.v("WRITE_ARREY",""+ (System.currentTimeMillis()-timeStart2));
+//                timeStart2=0;
+//            } catch (IOException e) {
+//                Log.e(TAG, "Exception during write", e);
+//            }
+//        }
         public void cancel() {
             try {
                 mmSocket.close();

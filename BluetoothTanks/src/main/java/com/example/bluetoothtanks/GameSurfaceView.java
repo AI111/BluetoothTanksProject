@@ -46,7 +46,7 @@ public class GameSurfaceView extends GLSurfaceView {
     MyVector2 greenSquare = new MyVector2(2,2);
     MyVector2 centre = new MyVector2(2,2);
     float jScale =1;
-    float DX=0.01f;
+   // float DX=0.01f;
     final private SimpleBluetoothTest activity;
 
     int fps=0;
@@ -56,7 +56,7 @@ public class GameSurfaceView extends GLSurfaceView {
     LinkedList<Bullet> deleteBullets = new LinkedList<Bullet>();
     LinkedList<Asteroid> asteroids = new LinkedList<Asteroid>();
     LinkedList<Asteroid> deleteAsteroids = new LinkedList<Asteroid>();
-    Iterator<Bullet> bulletIterator = bullets.iterator();
+    //Iterator<Bullet> bulletIterator = bullets.iterator();
 
     class Bullet{
         static final float firstSpeed=0.5f;
@@ -120,7 +120,7 @@ public class GameSurfaceView extends GLSurfaceView {
 
     boolean LittleWindow = true;
 
-    Asteroid asteroid = new Asteroid(new MyVector2(4,5),new MyVector2(0,0),0);
+    //Asteroid asteroid = new Asteroid(new MyVector2(4,5),new MyVector2(0,0),0);
     Tank serverTank;// = new Tank(new MyVector2(2,2),new MyVector2(0,0),0);
     Tank clientTank;//= new Tank(new MyVector2(6,6),new MyVector2(0,0),0);
 
@@ -158,7 +158,7 @@ public class GameSurfaceView extends GLSurfaceView {
                 //SERVER GANARATE ASEROIDS
                 if(BluetoothConnect.SERVER){
                     Random random = new Random();
-                    float x,y,angle;
+
                     Circle c;
                     for(int i=0;i<ASTEROIDS_NUMBER;i++){
                         float  cicleD=0.8f;
@@ -220,13 +220,13 @@ public class GameSurfaceView extends GLSurfaceView {
 
                 int i =6;
                 for(Asteroid asteroid1 : asteroids){
-                   BluetoothConnect.WRITE_ARREY[i]=asteroid1.position.x;
-                    Log.d("ASTEROID_1",i+" "+asteroid1.position.x);
-                   BluetoothConnect.WRITE_ARREY[++i]=asteroid1.position.y;
-                    Log.d("ASTEROID_2",i+" "+asteroid1.position.y);
-                   BluetoothConnect.WRITE_ARREY[++i]=asteroid1.angle;
-                    Log.d("ASTEROID_3",i+" "+asteroid1.angle);
-                        i++;
+                   BluetoothConnect.WRITE_ARREY[i++]=asteroid1.position.x;
+                  //  Log.d("ASTEROID_1",i+" "+asteroid1.position.x);
+                   BluetoothConnect.WRITE_ARREY[i++]=asteroid1.position.y;
+                    //Log.d("ASTEROID_2",i+" "+asteroid1.position.y);
+                   BluetoothConnect.WRITE_ARREY[i++]=asteroid1.angle;
+                    //Log.d("ASTEROID_3",i+" "+asteroid1.angle);
+
                 }
                 activity.myBluetoothConnect.write();
                 BluetoothConnect.WRITE_ARREY[3]=-100;
@@ -237,13 +237,13 @@ public class GameSurfaceView extends GLSurfaceView {
                 clientTank.angle=BluetoothConnect.READ_ARREY[2];
 
                 if(BluetoothConnect.READ_ARREY[3]!=-100&&BluetoothConnect.READ_ARREY[4]!=-100){
-                    Log.v("ARRAY", "" + BluetoothConnect.READ_ARREY[3] + " " + BluetoothConnect.READ_ARREY[4]);
+                //    Log.v("ARRAY", "" + BluetoothConnect.READ_ARREY[3] + " " + BluetoothConnect.READ_ARREY[4]);
                     bullets.add(new Bullet(new MyVector2(BluetoothConnect.READ_ARREY[0],BluetoothConnect.READ_ARREY[1]),
                             new MyVector2(BluetoothConnect.READ_ARREY[3],BluetoothConnect.READ_ARREY[4]),BluetoothConnect.READ_ARREY[5]));
 //                    clientTankBullet.position.x=BluetoothConnect.READ_ARREY[3];
 //                    clientTankBullet.position.y=BluetoothConnect.READ_ARREY[4];
 //                    clientTankBullet.angle=BluetoothConnect.READ_ARREY[5];
-                    Log.v("ARRAY 1", "" + BluetoothConnect.READ_ARREY[3] + " " + BluetoothConnect.READ_ARREY[4]);
+                  //  Log.v("ARRAY 1", "" + BluetoothConnect.READ_ARREY[3] + " " + BluetoothConnect.READ_ARREY[4]);
                    // BluetoothConnect.READ_ARREY[3]=-100;
                     //BluetoothConnect.READ_ARREY[4]=-100;
 
@@ -291,21 +291,21 @@ public class GameSurfaceView extends GLSurfaceView {
                                 ,asteroid1.angle,asteroidRegion);
 
                     }
-                    Log.d("WRITE_ARRAY", "" + Arrays.toString(BluetoothConnect.WRITE_ARREY));
-                    Log.d("READ_ARREY", "" + Arrays.toString(BluetoothConnect.READ_ARREY));
+                   // Log.d("WRITE_ARRAY", "" + Arrays.toString(BluetoothConnect.WRITE_ARREY));
+                  //  Log.d("READ_ARREY", "" + Arrays.toString(BluetoothConnect.READ_ARREY));
                 }else {
-                    Log.d("WRITE_ARRAY", "" + Arrays.toString(BluetoothConnect.WRITE_ARREY));
-                    Log.d("READ_ARREY", "" + Arrays.toString(BluetoothConnect.READ_ARREY));
+                   // Log.d("WRITE_ARRAY", "" + Arrays.toString(BluetoothConnect.WRITE_ARREY));
+                 //   Log.d("READ_ARREY", "" + Arrays.toString(BluetoothConnect.READ_ARREY));
                     if(BluetoothConnect.READ_ARREY[6]!=-100){
                         spriteBatcher.drawSprite(BluetoothConnect.READ_ARREY[6],BluetoothConnect.READ_ARREY[7],1,1
                                 ,BluetoothConnect.READ_ARREY[8],asteroidRegion);
                         int j=9;
 
                         while(BluetoothConnect.READ_ARREY[j]!=-100){
-                            spriteBatcher.drawSprite(BluetoothConnect.READ_ARREY[j],BluetoothConnect.READ_ARREY[++j],1,1
-                                    ,BluetoothConnect.READ_ARREY[++j],asteroidRegion);
-                            j++;
-                            Log.d("DRAW ASTEROID", j+ "");
+                            spriteBatcher.drawSprite(BluetoothConnect.READ_ARREY[j++],BluetoothConnect.READ_ARREY[j++],1,1
+                                    ,BluetoothConnect.READ_ARREY[j++],asteroidRegion);
+
+                         //   Log.d("DRAW ASTEROID", j+ "");
                         }
                     }
                 }
@@ -324,7 +324,7 @@ public class GameSurfaceView extends GLSurfaceView {
 
                     bullets.removeAll(deleteBullets);
                     deleteBullets.clear();
-                    Log.d("BULLETS", bullets.size() + "");
+                //    Log.d("BULLETS", bullets.size() + "");
                 }
 //
                 cameraChange(gl);
