@@ -11,8 +11,6 @@ import android.util.Log;
 
 import com.example.bluetoothtanks.framework.Positions;
 
-import junit.framework.Test;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -54,7 +52,7 @@ public class BluetoothConnect {
     public static final int STATE_CONNECTING = 2; // now initiating an outgoing connection
     public static final int STATE_CONNECTED = 3;  // now connected to a remote device
 
-    private String adress;
+
 
     /**
      * Constructor. Prepares a new BluetoothChat session.
@@ -446,6 +444,7 @@ public class BluetoothConnect {
         public void run() {
             Log.i(TAG, "BEGIN mConnectedThread");
             byte[] buffer = new byte[READ_ARREY.length*4];
+            floatInBufferf = ByteBuffer.wrap(buffer).asFloatBuffer();
 
 
             int bytes;
@@ -455,22 +454,15 @@ public class BluetoothConnect {
                 try {
                     timeStart1= System.currentTimeMillis();
                     // Read from the InputStream
+                    Log.d("ARRAY",Arrays.toString(READ_ARREY));
 
                     bytes = mmInStream.read(buffer);
 
+                    floatInBufferf.get(READ_ARREY);
 
-                        floatInBufferf = ByteBuffer.wrap(buffer).asFloatBuffer();
-                        floatInBufferf.get(READ_ARREY);
-
-
-
-                   // StringBuffer sb=new StringBuffer();
-//                    for(float i:array){
-//                        sb.append(i);
-//                    }
-                    floatInBufferf.flip();
+                    floatInBufferf.clear();
                     Log.d("READ_ARREY", "" + (System.currentTimeMillis() - timeStart1));
-                    timeStart1=0;
+
 
                 } catch (IOException e) {
                     Log.e(TAG, "disconnected", e);
@@ -499,7 +491,6 @@ public class BluetoothConnect {
                 byteOutBuffer.clear();
                 floatOutBuffer.clear();
                 // Share the sent message back to the UI Activity
-             //   mHandler.obtainMessage(MainActivity.MESSAGE_WRITE, -1, -1, buffer).sendToTarget();
 
                Log.v("WRITE_ARREY",""+ (System.currentTimeMillis()-timeStart2));
                 timeStart2=0;
@@ -507,27 +498,7 @@ public class BluetoothConnect {
                 Log.e(TAG, "Exception during write", e);
             }
         }
-//        public void read() {
-//
-//            try {
-//                timeStart2= System.currentTimeMillis();
-//
-//
-//                floatOutBuffer.put(WRITE_ARREY);
-//
-//                mmOutStream.write(byteOutBuffer.array());
-//
-//                byteOutBuffer.clear();
-//                floatOutBuffer.clear();
-//                // Share the sent message back to the UI Activity
-//                //   mHandler.obtainMessage(MainActivity.MESSAGE_WRITE, -1, -1, buffer).sendToTarget();
-//
-//             //   Log.v("WRITE_ARREY",""+ (System.currentTimeMillis()-timeStart2));
-//                timeStart2=0;
-//            } catch (IOException e) {
-//                Log.e(TAG, "Exception during write", e);
-//            }
-//        }
+
         public void cancel() {
             try {
                 mmSocket.close();
