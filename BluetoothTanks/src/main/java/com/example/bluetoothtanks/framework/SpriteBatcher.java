@@ -80,7 +80,7 @@ public class SpriteBatcher {
     public void drawSprite(float x, float y, float width, float height, float angle, TextureRegion region) {
         float halfWidth = width / 2;
         float halfHeight = height / 2;
-        float rad = angle * MyVector2.TO_RADIANS;
+        float rad = angle * Vector2.TO_RADIANS;
         float cos = FloatMath.cos(rad);
         float sin = FloatMath.sin(rad);
         float x1 = -halfWidth * cos - (-halfHeight) * sin;

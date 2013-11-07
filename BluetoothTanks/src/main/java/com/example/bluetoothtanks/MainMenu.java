@@ -41,13 +41,13 @@ public class MainMenu extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button :
-                intent=new Intent(this,SimpleBluetoothTest.class);
-                SimpleBluetoothTest.SERVER=true;
+                intent=new Intent(this,SimpleBluetoothGame.class);
+                SimpleBluetoothGame.SERVER=true;
                 startActivity(intent);
                 break;
             case R.id.button2:
-                intent=new Intent(this,SimpleBluetoothTest.class);
-                SimpleBluetoothTest.SERVER=false;
+                intent=new Intent(this,SimpleBluetoothGame.class);
+                SimpleBluetoothGame.SERVER=false;
                 startActivity(intent);
                 break;
             default:

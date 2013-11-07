@@ -5,10 +5,10 @@ package com.example.bluetoothtanks.framework;
  */
 
     public class Rectangle {
-        public final MyVector2 lowerLeft;
+        public final Vector2 lowerLeft;
         public float width, height;
         public Rectangle(float x, float y, float width, float height) {
-            this.lowerLeft = new MyVector2(x,y);
+            this.lowerLeft = new Vector2(x,y);
             this.width = width;
             this.height = height;
         }

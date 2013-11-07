@@ -5,49 +5,49 @@ package com.example.bluetoothtanks.framework;
  */
 import android.util.FloatMath;
 
-public class MyVector2 {
+public class Vector2 {
     public static float TO_RADIANS = (1 / 180.0f) * (float) Math.PI;
     public static float TO_DEGREES = (1 / (float) Math.PI) * 180;
     public float x, y;
-    public MyVector2() {
+    public Vector2() {
     }
-    public MyVector2(float x, float y) {
+    public Vector2(float x, float y) {
         this.x = x;
         this.y = y;
     }
-    public MyVector2(MyVector2 other) {
+    public Vector2(Vector2 other) {
         this.x = other.x;
         this.y = other.y;
     }
-    public MyVector2 cpy(){
-        return  new MyVector2(x,y);
+    public Vector2 cpy(){
+        return  new Vector2(x,y);
     }
-    public  MyVector2 set(MyVector2 other){
+    public  Vector2 set(Vector2 other){
         this.x=other.x;
         this.y=other.y;
         return this;
     }
-    public MyVector2 add(float x, float y) {
+    public Vector2 add(float x, float y) {
         this.x += x;
         this.y += y;
         return this;
     }
-    public MyVector2 add(MyVector2 other) {
+    public Vector2 add(Vector2 other) {
         this.x += other.x;
         this.y += other.y;
         return this;
     }
-    public MyVector2 sub(float x, float y) {
+    public Vector2 sub(float x, float y) {
         this.x -= x;
         this.y -= y;
         return this;
     }
-    public MyVector2 sub(MyVector2 other) {
+    public Vector2 sub(Vector2 other) {
         this.x -= other.x;
         this.y -= other.y;
         return this;
     }
-    public MyVector2 mul(float scalar) {
+    public Vector2 mul(float scalar) {
         this.x *= scalar;
         this.y *= scalar;
         return this;
@@ -55,7 +55,7 @@ public class MyVector2 {
     public float len() {
         return FloatMath.sqrt(x * x + y * y);
     }
-    public MyVector2 nor(){
+    public Vector2 nor(){
         float len=len();
         if(len!=0){
             this.x/=len;
@@ -69,7 +69,7 @@ public class MyVector2 {
             angle += 360;
         return angle;
     }
-    public MyVector2 rotate(float angle) {
+    public Vector2 rotate(float angle) {
         float rad = angle * TO_RADIANS;
         float cos = FloatMath.cos(rad);
         float sin = FloatMath.sin(rad);
@@ -79,7 +79,7 @@ public class MyVector2 {
         this.y = newY;
         return this;
     }
-    public float dist(MyVector2 other) {
+    public float dist(Vector2 other) {
         float distX = this.x - other.x;
         float distY = this.y - other.y;
         return FloatMath.sqrt(distX * distX + distY * distY);
@@ -89,7 +89,7 @@ public class MyVector2 {
         float distY = this.y - y;
         return FloatMath.sqrt(distX * distX + distY * distY);
     }
-    public float distSquared(MyVector2 other) {
+    public float distSquared(Vector2 other) {
         float distX = this.x - other.x;
         float distY = this.y - other.y;
         return distX*distX + distY*distY;

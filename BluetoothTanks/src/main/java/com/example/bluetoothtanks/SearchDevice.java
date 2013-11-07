@@ -35,7 +35,7 @@ private ArrayAdapter<String> mArrayAdapter;
 // Регистрируем BroadcastReceiver
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         registerReceiver(mReceiver, filter);
-        Set<BluetoothDevice> pairedDevices = SimpleBluetoothTest.bluetooth.getBondedDevices();
+        Set<BluetoothDevice> pairedDevices = SimpleBluetoothGame.bluetooth.getBondedDevices();
 // Если список спаренных устройств не пуст
         if (pairedDevices.size() > 0) {
             // проходимся в цикле по этому списку
@@ -59,7 +59,7 @@ private ArrayAdapter<String> mArrayAdapter;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case 0:SimpleBluetoothTest.bluetooth.startDiscovery();
+            case 0:SimpleBluetoothGame.bluetooth.startDiscovery();
 
         }
         return super.onOptionsItemSelected(item);
@@ -67,7 +67,7 @@ private ArrayAdapter<String> mArrayAdapter;
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        SimpleBluetoothTest.bluetooth.cancelDiscovery();
+        SimpleBluetoothGame.bluetooth.cancelDiscovery();
         String info = ((TextView) v).getText().toString();
         String address = info.substring(info.length() - 17);
        // Toast.makeText(this, address, Toast.LENGTH_LONG).show();
@@ -81,8 +81,8 @@ private ArrayAdapter<String> mArrayAdapter;
     }
     @Override
     protected void onDestroy() {
-        if (SimpleBluetoothTest.bluetooth != null) {
-            SimpleBluetoothTest.bluetooth.cancelDiscovery();
+        if (SimpleBluetoothGame.bluetooth != null) {
+            SimpleBluetoothGame.bluetooth.cancelDiscovery();
         }
         this.unregisterReceiver(mReceiver);
         super.onDestroy();

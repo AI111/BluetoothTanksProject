@@ -17,7 +17,7 @@ import com.example.bluetoothtanks.framework.*;
 /**
  * Created by Sasha on 9/11/13.
  */
-public class SimpleBluetoothTest extends Activity {
+public class SimpleBluetoothGame extends Activity {
     private GameSurfaceView glView;
 public static boolean SERVER;
     PowerManager.WakeLock wl;

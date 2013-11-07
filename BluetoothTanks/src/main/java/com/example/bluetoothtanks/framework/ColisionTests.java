@@ -9,6 +9,11 @@ public class ColisionTests {
         float radiusSum = c1.radius + c2.radius;
         return distance <= radiusSum * radiusSum;
     }
+    public static boolean overlapCiCrcles(Vector2 centr1,float radius1,Vector2 centr2,float radius2 ) {
+        float distance = centr1.distSquared(centr2);
+        float radiusSum = radius1 + radius2;
+        return distance <= radiusSum * radiusSum;
+    }
     public static boolean overlapRectangles(Rectangle r1, Rectangle r2) {
         if(r1.lowerLeft.x < r2.lowerLeft.x + r2.width &&
                 r1.lowerLeft.x + r1.width > r2.lowerLeft.x &&
@@ -36,13 +41,13 @@ public class ColisionTests {
         return c.center.distSquared(closestX, closestY) < c.radius *
                 c.radius;
     }
-    public static boolean pointInCircle(Circle c, MyVector2 p) {
+    public static boolean pointInCircle(Circle c, Vector2 p) {
         return c.center.distSquared(p) < c.radius * c.radius;
     }
     public static boolean pointInCircle(Circle c, float x, float y) {
         return c.center.distSquared(x, y) < c.radius * c.radius;
     }
-    public static boolean pointInRectangle(Rectangle r, MyVector2 p) {
+    public static boolean pointInRectangle(Rectangle r, Vector2 p) {
         return r.lowerLeft.x <= p.x && r.lowerLeft.x + r.width >= p.x &&
                 r.lowerLeft.y <= p.y && r.lowerLeft.y + r.height >= p.y;
     }

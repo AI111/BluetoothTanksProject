@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BluetoothTanks/BluetoothTanks.iml" filepath="$PROJECT_DIR$/BluetoothTanks/BluetoothTanks.iml" />
       <module fileurl="file://$PROJECT_DIR$/BluetoothTanksProject.iml" filepath="$PROJECT_DIR$/BluetoothTanksProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gradle/gradle.iml" filepath="$PROJECT_DIR$/gradle/gradle.iml" />
     </modules>
   </component>
 </project>

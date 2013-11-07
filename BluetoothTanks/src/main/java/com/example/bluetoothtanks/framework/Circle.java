@@ -4,7 +4,7 @@ package com.example.bluetoothtanks.framework;
  * Created by Sasha on 08.09.13.
  */
 public class Circle {
-    public final MyVector2 center = new MyVector2();
+    public final Vector2 center = new Vector2();
     public float radius;
 
     /**
